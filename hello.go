@@ -22,11 +22,11 @@ func main() {
 	)
 	fmt.Println(sun, mon, tue)
 
-	a, b := 10, 100
-	if a > b {
+	a1, b1 := 10, 100
+	if a1 > b1 {
 		fmt.Println("a > b")
-	} else if a < b {
-		fmt.Pringln("a < b")
+	} else if a1 < b1 {
+		fmt.Println("a < b")
 	} else {
 		fmt.Println("a = b")
 	}
