@@ -34,4 +34,8 @@ func main() {
 	for i := 0; i < 10; i++ {
 		fmt.Println(i)
 	}
+
+	for {
+		fmt.Println("無限ループ")
+	}
 }
