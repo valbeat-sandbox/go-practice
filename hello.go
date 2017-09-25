@@ -35,9 +35,9 @@ func main() {
 		fmt.Println(i)
 	}
 
-	for {
-		fmt.Println("無限ループ")
-	}
+	//	for {
+	//		fmt.Println("無限ループ")
+	//	}
 
 	n := 3
 	switch n {
@@ -51,4 +51,10 @@ func main() {
 		n = n - 1
 		fmt.Println(n) // 0
 	}
+	sumNum := sum(1, 2)
+	println(sumNum)
+}
+
+func sum(i, j int) int { // == func sum(int i,int j)
+	return i + j
 }
