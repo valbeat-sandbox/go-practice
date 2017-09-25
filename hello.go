@@ -21,4 +21,13 @@ func main() {
 		tue
 	)
 	fmt.Println(sun, mon, tue)
+
+	a, b := 10, 100
+	if a > b {
+		fmt.Println("a > b")
+	} else if a < b {
+		fmt.Pringln("a < b")
+	} else {
+		fmt.Println("a = b")
+	}
 }
