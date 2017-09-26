@@ -52,9 +52,14 @@ func main() {
 		fmt.Println(n) // 0
 	}
 	sumNum := sum(1, 2)
-	println(sumNum)
+	fmt.Println(sumNum)
+	fmt.Println(swap(1, 2))
 }
 
 func sum(i, j int) int { // == func sum(int i,int j)
 	return i + j
+}
+
+func swap(i, j int) (int, int) {
+	return j, i
 }
