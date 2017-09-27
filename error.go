@@ -14,9 +14,11 @@ func main() {
 	fmt.Println(n)
 }
 
-func div(i, j int) (int, error) {
+func div(i, j int) (result int, err error) {
 	if j == 0 {
-		return 0, errors.New("divied by zero")
+		err = errors.New("divied by zero")
+		return // return 0, err
 	}
-	return i / j, nil
+	result = i / j
+	return // return result, nil
 }
