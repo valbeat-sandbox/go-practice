@@ -8,4 +8,7 @@ func main() {
 		2: "Feb",
 	}
 	fmt.Println(month)
+
+	_, ok := month[1]
+	fmt.Println(ok)
 }
