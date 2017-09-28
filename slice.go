@@ -11,4 +11,12 @@ func main() {
 	for i, s := range slice {
 		fmt.Println(i, s)
 	}
+	fmt.Println(sum(1, 2, 3, 4))
+}
+
+func sum(nums ...int) (result int) {
+	for _, n := range nums {
+		result += n
+	}
+	return
 }
