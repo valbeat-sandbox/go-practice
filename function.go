@@ -2,8 +2,10 @@ package main
 
 import "fmt"
 
+var sum func(i, j int) int = func(i, j int) int {
+	return i + j
+}
+
 func main() {
-	func(i, j int) {
-		fmt.Println(i, j)
-	}(2, 4)
+	fmt.Println(sum(2, 4))
 }
