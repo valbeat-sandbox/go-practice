@@ -8,6 +8,11 @@ type Task struct {
 	done   bool // 小文字は閉じたスコープ
 }
 
+// String() という振る舞いを規定するインターフェース
+type Stringer interface {
+	String() string
+}
+
 // コンストラクタを定義出来ないので自前でメソッドを用意
 func newTask(id int, detail string) *Task {
 	task := &Task{
