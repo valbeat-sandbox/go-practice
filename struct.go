@@ -40,6 +40,11 @@ func Print(stringer Stringer) {
 	fmt.Println(stringer.String())
 }
 
+// どのような型でも受け付けるinterfaceの実装
+func Do(e interface{}) {
+	// do something
+}
+
 func main() {
 	task := newTask(1, "Goの練習")
 	task.Finish()
