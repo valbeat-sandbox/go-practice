@@ -25,10 +25,6 @@ func (task Task) String() string {
 }
 
 func main() {
-	var task Task = Task{
-		ID:     1,
-		Detail: "goの練習",
-		done:   true,
-	}
+	task := newTask(1, "Goの練習")
 	fmt.Println(task)
 }
