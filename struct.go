@@ -26,6 +26,7 @@ type Task struct {
 	ID     int
 	Detail string
 	done   bool // 小文字は閉じたスコープ
+	*User       // フィールドではなく、型のみを記述すると「埋め込み」となる
 }
 
 // String() という振る舞いを規定するインターフェース
