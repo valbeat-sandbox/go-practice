@@ -2,6 +2,25 @@ package main
 
 import "fmt"
 
+// ユーザーの定義
+type User struct {
+	FirstName string
+	LastName  string
+}
+
+// コンストラクタ
+func NewUser(firstName string, lastName string) *User {
+	return &User{
+		FirstName: firstName,
+		LastName:  lastName,
+	}
+}
+
+// フルネームを返すメソッド
+func (u User) FullName() string {
+	return fmt.Sprintf("%s %s", u.FirstName, u.LastName)
+}
+
 // タスクの定義
 type Task struct {
 	ID     int
@@ -36,6 +55,7 @@ func (task Task) String() string {
 	return str
 }
 
+// Stringerの実装
 func Print(stringer Stringer) {
 	fmt.Println(stringer.String())
 }
