@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// タスクの定義
 type Task struct {
 	ID     int
 	Detail string
@@ -35,8 +36,12 @@ func (task Task) String() string {
 	return str
 }
 
+func Print(stringer Stringer) {
+	fmt.Println(stringer.String())
+}
+
 func main() {
 	task := newTask(1, "Goの練習")
 	task.Finish()
-	fmt.Println(task)
+	Print(task)
 }
