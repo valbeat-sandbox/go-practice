@@ -24,7 +24,7 @@ func UserHandler(writer http.ResponseWriter, request *http.Request) {
 		// リクエストボディをJSONに変換
 		var user User
 		decoder := json.NewDecoder(request.Body)
-		// デコードの返り値はパニック
+		// デコードの返り値はエラー
 		err := decoder.Decode(&user)
 		if err != nil {
 			log.Fatal(err)
