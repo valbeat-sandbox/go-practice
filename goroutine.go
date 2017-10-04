@@ -6,12 +6,7 @@ import (
 	"net/http"
 )
 
-func main() {
-	urls := []string{
-		"http://google.com",
-		"http://yahoo.com",
-		"http://example.com",
-	}
+func getStatus(urls []string) <-chan string {
 	statusChan := make(chan string)
 	for _,url := range urls  {
 		// 処理を関数化し、goを付けると非同期処理となる
@@ -25,6 +20,16 @@ func main() {
 			statusChan <- res.Status
 		}(url)
 	}
+	return statusChan
+}
+
+func main() {
+	urls := []string{
+		"http://google.com",
+		"http://yahoo.com",
+		"http://example.com",
+	}
+	statusChan := getStatus(urls)
 	for i := 0; i < len(urls); i++  {
 		// チャネルから読み出し
 		fmt.Println(<-statusChan)
