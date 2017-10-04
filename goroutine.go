@@ -14,6 +14,7 @@ func main() {
 		"http://yahoo.com",
 		"http://example.com",
 	}
+	statusChan := make(chan string)
 	for _,url := range urls  {
 		// waitGroupにカウント追加
 		wait.Add(1)
@@ -24,10 +25,15 @@ func main() {
 				log.Fatal(err)
 			}
 			defer res.Body.Close()
-			fmt.Println(url, res.Status)
+			// チャネルに書き込み
+			statusChan <- res.Status
 			// カウント減らす
 			wait.Done()
 		}(url)
+	}
+	for i := 0; i < len(urls); i++  {
+		// チャネルから読み出し
+		fmt.Println(<-statusChan)
 	}
 	// 待ち合わせ
 	wait.Wait()
