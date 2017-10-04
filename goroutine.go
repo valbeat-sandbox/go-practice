@@ -4,16 +4,19 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
+	"sync"
 )
 
 func main() {
+	wait := new(sync.WaitGroup)
 	urls := []string{
 		"http://google.com",
 		"http://yahoo.com",
 		"http://example.com",
 	}
 	for _,url := range urls  {
+		// waitGroupにカウント追加
+		wait.Add(1)
 		// 処理を関数化し、goを付けると非同期処理となる
 		go func(url string) {
 			res, err := http.Get(url)
@@ -22,8 +25,10 @@ func main() {
 			}
 			defer res.Body.Close()
 			fmt.Println(url, res.Status)
+			// カウント減らす
+			wait.Done()
 		}(url)
 	}
-	// main()が終わらないようにSleep
-	time.Sleep(time.Second * 5)
+	// 待ち合わせ
+	wait.Wait()
 }
