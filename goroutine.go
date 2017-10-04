@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -23,4 +24,6 @@ func main() {
 			fmt.Println(url, res.Status)
 		}(url)
 	}
+	// main()が終わらないようにSleep
+	time.Sleep(time.Second)
 }
