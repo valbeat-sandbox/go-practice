@@ -25,5 +25,5 @@ func main() {
 		}(url)
 	}
 	// main()が終わらないようにSleep
-	time.Sleep(time.Second)
+	time.Sleep(time.Second * 5)
 }
