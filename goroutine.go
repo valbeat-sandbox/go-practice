@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+// ステータスをチャネルとして取得するメソッド
+// 戻り値を<-chanと読み出し専用にすることで外部からの書き込みを防ぐ
 func getStatus(urls []string) <-chan string {
 	statusChan := make(chan string)
 	for _,url := range urls  {
