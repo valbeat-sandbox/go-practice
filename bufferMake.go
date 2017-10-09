@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	ch := make(chan string)
+	ch := make(chan string,3)
 	go func() {
 		time.Sleep(time.Second)
 		// 一秒後にデータが読まれる
