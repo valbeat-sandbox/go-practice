@@ -7,29 +7,40 @@ import (
 	"fmt"
 )
 
+var empty struct{} // サイズがゼロの構造体
+
 // ステータスをチャネルとして取得するメソッド
 // 戻り値を<-chanと読み出し専用にすることで外部からの書き込みを防ぐ
 func getStatus(urls []string) <-chan string {
 	// バッファをURLの数(3)に
-	statusChan := make(chan string)
-	for _,url := range urls  {
-		// 処理を関数化し、goを付けると非同期処理となる
-		go func(url string) {
-			res, err := http.Get(url)
-			if err != nil {
-				log.Fatal(err)
+	statusChan := make(chan string, 3)
+	limit := make(chan struct{}, 5)
+	go func() {
+		for _,url := range urls {
+			select {
+			case limit <- empty:
+				// limitに書き込みが可能な場合は取得処理を実行
+				go func(url string) {
+					// このゴルーチンは同時に5つのみ起動
+					res, err := http.Get(url)
+					if err != nil {
+						log.Fatal(err)
+					}
+					defer res.Body.Close()
+					// チャネルに書き込み
+					// mainの読み込みが遅くてもbufferがあるのですぐに終わる
+					statusChan <- res.Status
+					// 終わったら一つ解放
+					<-limit
+				}(url)
 			}
-			defer res.Body.Close()
-			// チャネルに書き込み
-			// mainの読み込みが遅くてもbufferがあるのですぐに終わる
-			statusChan <- res.Status
-		}(url)
-	}
+		}
+	}()
 	return statusChan
 }
 
 func main() {
-	timeout := time.After(time.Second)
+	timeout := time.After(time.Second * 10)
 	urls := []string{
 		"http://google.com",
 		"http://yahoo.com",
