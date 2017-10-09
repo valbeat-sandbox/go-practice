@@ -9,9 +9,9 @@ func main() {
 	ch := make(chan string)
 	go func() {
 		time.Sleep(time.Second)
-		// 一秒後にデータを書き込む
-		ch <- "foo"
+		// 一秒後にデータが読まれる
+		<-ch
 	}()
-	// データが書き込まれるまでブロック
-	fmt.Println(<-ch)
+	// データが読み出されるまでブロック
+	ch<- "foo"
 }
