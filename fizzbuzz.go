@@ -6,17 +6,17 @@ import (
 
 func main() {
 	for i := 1; i <= 100; i++ {
-		ToFizzBuzz(i)
+		fmt.Println(ToFizzBuzz(i))
 	}
 }
-func ToFizzBuzz(amount int) {
+func ToFizzBuzz(amount int) interface{} {
 	if amount%15 == 0 {
-		fmt.Println("FizzBuzz")
+		return "FizzBuzz"
 	} else if amount%3 == 0 {
-		fmt.Println("Fizz")
+		return "Fizz"
 	} else if amount%5 == 0 {
-		fmt.Println("Buzz")
+		return "Buzz"
 	} else {
-		fmt.Println(amount)
+		return amount
 	}
 }
